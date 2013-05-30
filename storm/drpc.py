@@ -2,7 +2,7 @@ from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 from DistributedRPC import Client
-
+import json
 
 class DRPCClient:
     def __init__(self, host, port=3772, timeout=None):
@@ -21,7 +21,7 @@ class DRPCClient:
         self.client = Client(self.protocol)
 
     def execute(self, func, args):
-        self.client.execute(func, args)
+        return json.loads(self.client.execute(func, args))
 
     def close(self):
         self.transport.close()
