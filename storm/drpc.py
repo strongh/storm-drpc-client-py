@@ -15,10 +15,10 @@ class DRPCClient:
         self.socket = TSocket.TSocket(self.host, self.port)
         if self.timeout:
             self.socket.setTimeout(self.timeout)
-        self.transport = TTransport.TFramedTransport(socket)
-        self.protocol = TBinaryProtocol.TBinaryProtocol(transport)
+        self.transport = TTransport.TFramedTransport(self.socket)
+        self.protocol = TBinaryProtocol.TBinaryProtocol(self.transport)
         self.transport.open()
-        self.client = Client(protocol)        
+        self.client = Client(self.protocol)
 
     def execute(self, func, args):
         self.client.execute(func, args)
