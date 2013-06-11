@@ -8,7 +8,7 @@ install_requires = [
 
 setuptools.setup(
     name = 'storm-drpc-client',
-    version = '0.0.1',
+    version = '0.0.2',
     license = 'Apache',
     description = '''Simple pythonic interface around thrift-generated DRPC client.''',
     author = 'Homer Strong',

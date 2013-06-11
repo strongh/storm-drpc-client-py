@@ -23,5 +23,8 @@ class DRPCClient:
     def execute(self, func, args):
         return json.loads(self.client.execute(func, args))
 
+    def executeJSON(self, func, **kwargs):
+        return self.execute(func, json.dumps(kwargs))
+
     def close(self):
         self.transport.close()
