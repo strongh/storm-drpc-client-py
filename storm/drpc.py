@@ -27,13 +27,16 @@ class DRPCClient:
     def executeJSON(self, func, **kwargs):
         return self.execute(func, json.dumps(kwargs))
 
-    # memoized versions of above
-    @lru_cache(maxsize=100)
-    def executeLRU(self, func, args):
-        return json.loads(self.client.execute(func, args))
-
-    def executeLRUJSON(self, func, **kwargs):
-        return self.executeLRU(func, json.dumps(kwargs))
-
     def close(self):
         self.transport.close()
+
+
+class DRPCLRUClient(DRPCClient):
+    def __init__(self, host, port=3772, timeout=None, cache_size=10):
+        self.host = host
+        self.port = port
+        self.timeout = timeout
+        self.connect()
+        cache_size = 100
+        self.cache = lru_cache(maxsize=cache_size)
+        self.execute = self.cache(self.execute)
