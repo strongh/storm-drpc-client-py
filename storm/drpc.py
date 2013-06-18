@@ -1,6 +1,7 @@
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
+from repoze.lru import lru_cache
 from DistributedRPC import Client
 import json
 
@@ -25,6 +26,14 @@ class DRPCClient:
 
     def executeJSON(self, func, **kwargs):
         return self.execute(func, json.dumps(kwargs))
+
+    # memoized versions of above
+    @lru_cache(maxsize=100)
+    def executeLRU(self, func, args):
+        return json.loads(self.client.execute(func, args))
+
+    def executeLRUJSON(self, func, **kwargs):
+        return self.executeLRU(func, json.dumps(kwargs))
 
     def close(self):
         self.transport.close()
