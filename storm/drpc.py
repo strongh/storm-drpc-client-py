@@ -32,7 +32,7 @@ class DRPCClient:
 
 
 class DRPCLRUClient(DRPCClient):
-    def __init__(self, host, port=3772, timeout=None, cache_size=10):
+    def __init__(self, host, port=3772, timeout=None, cache_size=50):
         self.host = host
         self.port = port
         self.timeout = timeout
