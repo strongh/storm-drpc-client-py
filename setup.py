@@ -12,7 +12,7 @@ setuptools.setup(
     version=version,
     license='LICENSE.html',
     description='Simple pythonic interface around thrift-generated DRPC client.',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
     author='Homer Strong',
     author_email='homer.strong@gmail.com',
     url='https://github.com/strongh/storm-drpc-client',
