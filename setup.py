@@ -15,7 +15,7 @@ setuptools.setup(
     long_description=open('README.rst').read(),
     author='Homer Strong',
     author_email='homer.strong@gmail.com',
-    url='https://github.com/strongh/storm-drpc-client',
+    url='https://github.com/strongh/storm-drpc-client-py',
     platforms='any',
     packages=['storm'],
     zip_safe=True,
